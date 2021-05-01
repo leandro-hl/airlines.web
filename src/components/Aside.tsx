@@ -1,26 +1,14 @@
 import { useIntl } from "react-intl";
-import {
-  ProSidebar,
-  Menu,
-  MenuItem,
-  SidebarHeader,
-  SidebarContent
-} from "react-pro-sidebar";
-import {
-  FaTachometerAlt,
-  FaGlobeAmericas,
-  FaLuggageCart,
-  FaPlane,
-  FaPlaneDeparture
-} from "react-icons/fa";
+import { ProSidebar, Menu, SidebarHeader, SidebarContent } from "react-pro-sidebar";
+
 import sidebarBg from "./../assets/bg1.jpg";
 
-const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
+const Aside = ({ image, collapsed, toggled, handleToggleSidebar, children }) => {
   const intl = useIntl();
+
   return (
     <ProSidebar
       image={image ? sidebarBg : null}
-      rtl={rtl}
       collapsed={collapsed}
       toggled={toggled}
       breakPoint="md"
@@ -44,21 +32,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
       </SidebarHeader>
 
       <SidebarContent>
-        <Menu iconShape="circle">
-          <MenuItem icon={<FaTachometerAlt />}>
-            {intl.formatMessage({ id: "dashboard" })}
-          </MenuItem>
-          <MenuItem icon={<FaLuggageCart />}>
-            {intl.formatMessage({ id: "airports" })}
-          </MenuItem>
-          <MenuItem icon={<FaGlobeAmericas />}>
-            {intl.formatMessage({ id: "airlines" })}
-          </MenuItem>
-          <MenuItem icon={<FaPlaneDeparture />}>
-            {intl.formatMessage({ id: "flights" })}
-          </MenuItem>
-          <MenuItem icon={<FaPlane />}>{intl.formatMessage({ id: "planes" })}</MenuItem>
-        </Menu>
+        <Menu iconShape="circle">{children}</Menu>
       </SidebarContent>
     </ProSidebar>
   );
