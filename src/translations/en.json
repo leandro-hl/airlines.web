@@ -1,0 +1,14 @@
+{
+  "title": "React Pro Sidebar",
+  "sidebarTitle": "Pro Sidebar",
+  "description": "React sidebar library with dropdown menus and unlimited number of nested submenus",
+  "dashboard": "Dashboard",
+  "airports": "Airports",
+  "airlines": "Airlines",
+  "flights": "Flights",
+  "planes": "Planes",
+  "collapsed": "Collapsed",
+  "rtl": "RTL",
+  "image": "Background image",
+  "new": "NEW"
+}
