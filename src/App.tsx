@@ -1,6 +1,8 @@
+import "react-pro-sidebar/dist/css/styles.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { IntlProvider } from "react-intl";
-import Layout from "./components/Layout";
+import Layout from "./components/layout/Layout";
 import { useState } from "react";
 
 import messages_en from "./translations/en.json";
