@@ -4,18 +4,16 @@ import ArrivalsAndDeparturesByAirport from "./ArrivalsAndDeparturesByAirport";
 
 const Dashboard = () => {
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col>
-            <ArrivalsAndDeparturesByAirport />
-          </Col>
-          <Col>
-            <ArrivalsAndDeparturesByAirport />
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <ArrivalsAndDeparturesByAirport />
+        </Col>
+        <Col>
+          <ArrivalsAndDeparturesByAirport />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
