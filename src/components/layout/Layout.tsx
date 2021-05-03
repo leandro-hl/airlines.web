@@ -13,6 +13,7 @@ import {
 import Aside from "./Aside";
 import Main from "./Main";
 import { Dashboard } from "../pages/dashboard/Dashboard";
+import { Airlines } from "../pages/airlines/Airlines";
 
 function Layout({ setLocale }) {
   const intl = useIntl();
@@ -55,10 +56,6 @@ function Layout({ setLocale }) {
 
 const Airports = () => {
   return <div>Here would be airports</div>;
-};
-
-const Airlines = () => {
-  return <div>Here would be airlines</div>;
 };
 
 const Flights = () => {
