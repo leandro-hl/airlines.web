@@ -48,4 +48,21 @@ const FormControlList = ({ data, controls, handleChange }) => {
   );
 };
 
-export { FormModal };
+const submit = async (item, items, setItems, api, onFinished) => {
+  if (item.id) {
+    await api.put(item.id, item);
+
+    setItems(
+      items.map(line => {
+        return line.id == item.id ? item : line;
+      })
+    );
+  } else {
+    item.id = (await api.post(item)).data.id;
+    setItems([...items, item]);
+  }
+
+  onFinished();
+};
+
+export { FormModal, submit };
