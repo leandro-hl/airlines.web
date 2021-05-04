@@ -7,14 +7,14 @@ const api = {
   getAll: async () => {
     return await axios.get(url);
   },
+  post: async airline => {
+    return await axios.post(url, airline);
+  },
   get: async (airlineId: number) => {
     return await axios.get(buildUrl(url, airlineId));
   },
-  put: async (airlineId: number) => {
-    return await axios.put(buildUrl(url, airlineId));
-  },
-  post: async (airlineId: number) => {
-    return await axios.post(buildUrl(url, airlineId));
+  put: async (airlineId: number, airline) => {
+    return await axios.put(buildUrl(url, airlineId), airline);
   }
 };
 
