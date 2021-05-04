@@ -1,20 +1,38 @@
-import { useState } from "react";
-import { Button, Container, Row } from "react-bootstrap";
-import { tableBuilder } from "../../shared/table";
+import React, { useState } from "react";
+import { Button, Container, Form, Row } from "react-bootstrap";
+
+import { buildTable } from "../../shared/table";
+import { AirlineModal } from "./AirlineModal";
 
 const Airlines = ({ data }) => {
   const [airlines, setAirlines] = useState(data);
+  const [show, setShow] = useState(false);
 
-  const actions = [{ desc: "Edit", onClick: row => console.log(row) }];
+  const actions = [
+    {
+      desc: "Edit",
+      onClick: row => {
+        console.log(row);
+        setShow(true);
+      }
+    }
+  ];
 
   return (
     <Container>
       <Row>
-        <Button onClick={() => setAirlines([...airlines, newAirline(airlines)])}>
+        <Button
+          onClick={() => {
+            setAirlines([...airlines, newAirline(airlines)]);
+            setShow(true);
+          }}
+        >
           +
         </Button>
       </Row>
-      <Row>{tableBuilder(airlines, actions)}</Row>
+      <Row>{buildTable(airlines, actions)}</Row>
+
+      <AirlineModal show={show} setShow={setShow} />
     </Container>
   );
 };
