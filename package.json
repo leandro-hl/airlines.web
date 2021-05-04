@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
@@ -29,7 +30,8 @@
     "@types/react-dom": "^17.0.3",
     "@types/react-intl": "^3.0.0",
     "@types/react-router-dom": "^5.1.7",
-    "@types/victory": "^33.1.4"
+    "@types/victory": "^33.1.4",
+    "dotenv": "^8.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
