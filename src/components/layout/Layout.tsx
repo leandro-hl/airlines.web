@@ -14,6 +14,7 @@ import Aside from "./Aside";
 import Main from "./Main";
 import { Dashboard } from "../pages/dashboard/Dashboard";
 import { Airlines } from "../pages/airlines/Airlines";
+import airlinesApi from "./../../api/airlines-api";
 
 function Layout({ setLocale }) {
   const intl = useIntl();
@@ -35,7 +36,12 @@ function Layout({ setLocale }) {
   const routes = [
     { icon: <FaTachometerAlt />, comp: Dashboard, route: "dashboard" },
     { icon: <FaLuggageCart />, comp: Airports, route: "airports" },
-    { icon: <FaGlobeAmericas />, comp: Airlines, route: "airlines" },
+    {
+      icon: <FaGlobeAmericas />,
+      comp: Airlines,
+      init: airlinesApi.getAll,
+      route: "airlines"
+    },
     { icon: <FaPlaneDeparture />, comp: Flights, route: "flights" },
     { icon: <FaPlane />, comp: Planes, route: "planes" }
   ];
