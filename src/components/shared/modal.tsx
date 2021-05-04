@@ -1,16 +1,24 @@
-import { Button, Modal } from "react-bootstrap";
-import React from "react";
+import { Modal } from "react-bootstrap";
+import { HlButton } from "./Button";
 
-const HlModal = ({ title, description, show, handleClose, children }) => {
+const HlModalContainer = ({ show, onHide, children }) => {
   return (
     <Modal
       show={show}
-      onHide={handleClose}
+      onHide={onHide}
       backdrop="static"
       keyboard={false}
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
+      {children}
+    </Modal>
+  );
+};
+
+const HlModal = ({ title, description, onHide, children }) => {
+  return (
+    <>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">{title}</Modal.Title>
       </Modal.Header>
@@ -19,11 +27,11 @@ const HlModal = ({ title, description, show, handleClose, children }) => {
         {children}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleClose}>Close</Button>
-        <Button type="submit">Save</Button>
+        <HlButton onClick={onHide}>Close</HlButton>
+        <HlButton submit>Save</HlButton>
       </Modal.Footer>
-    </Modal>
+    </>
   );
 };
 
-export { HlModal };
+export { HlModalContainer, HlModal };
