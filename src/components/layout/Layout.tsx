@@ -14,7 +14,10 @@ import Aside from "./Aside";
 import Main from "./Main";
 import { Dashboard } from "../pages/dashboard/Dashboard";
 import { Airlines } from "../pages/airlines/Airlines";
-import airlinesApi from "./../../api/airlines-api";
+import { Airports } from "../pages/airports/Airports";
+import { Flights } from "../pages/flights/Flights";
+import { Planes } from "../pages/planes/Planes";
+import { getRestApi } from "../../api/rest-api";
 
 function Layout({ setLocale }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -30,15 +33,30 @@ function Layout({ setLocale }) {
 
   const routes = [
     { icon: <FaTachometerAlt />, comp: Dashboard, route: "dashboard" },
-    { icon: <FaLuggageCart />, comp: Airports, route: "airports" },
+    {
+      icon: <FaLuggageCart />,
+      comp: Airports,
+      route: "airports",
+      init: getRestApi("airports").getAll
+    },
     {
       icon: <FaGlobeAmericas />,
       comp: Airlines,
-      init: airlinesApi.getAll,
-      route: "airlines"
+      route: "airlines",
+      init: getRestApi("airlines").getAll
     },
-    { icon: <FaPlaneDeparture />, comp: Flights, route: "flights" },
-    { icon: <FaPlane />, comp: Planes, route: "planes" }
+    {
+      icon: <FaPlaneDeparture />,
+      comp: Flights,
+      route: "flights",
+      init: getRestApi("flights").getAll
+    },
+    {
+      icon: <FaPlane />,
+      comp: Planes,
+      route: "planes",
+      init: getRestApi("planes").getAll
+    }
   ];
 
   const rt = routing(routes);
@@ -54,17 +72,5 @@ function Layout({ setLocale }) {
     </div>
   );
 }
-
-const Airports = () => {
-  return <div>Here would be airports</div>;
-};
-
-const Flights = () => {
-  return <div>Here would be flights</div>;
-};
-
-const Planes = () => {
-  return <div>Here would be planes</div>;
-};
 
 export default Layout;
