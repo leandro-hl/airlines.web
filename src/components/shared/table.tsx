@@ -41,7 +41,7 @@ const HlRow = ({ data, columns, actions }: { data; columns; actions? }) => {
   );
 };
 
-const tableBuilder = (data, actions) => {
+const buildTable = (data, actions) => {
   const columnNames = Object.keys(data[0]);
   const columns = columnNames.map(name => <HlColumn name={name} key={name} />);
 
@@ -52,4 +52,4 @@ const tableBuilder = (data, actions) => {
   return <HlTable columns={columns} rows={rows} actions={actions} />;
 };
 
-export { HlTable, HlColumn, HlActions, HlRow, tableBuilder };
+export { HlTable, HlColumn, HlActions, HlRow, buildTable };
