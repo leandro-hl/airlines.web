@@ -1,4 +1,5 @@
-import { Button, Table } from "react-bootstrap";
+import { HlButton } from "./Button";
+import { Table } from "react-bootstrap";
 
 const HlTable = ({ columns, rows, actions }: { columns; rows; actions? }) => {
   return (
@@ -22,9 +23,9 @@ const HlActions = ({ data, actions }) => {
   return (
     <td>
       {actions.map((ac, i) => (
-        <Button onClick={() => ac.onClick(data)} key={i}>
+        <HlButton onClick={() => ac.onClick(data)} key={i}>
           {ac.desc}
-        </Button>
+        </HlButton>
       ))}
     </td>
   );
