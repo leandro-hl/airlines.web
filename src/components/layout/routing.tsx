@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MenuItem } from "react-pro-sidebar";
 import { useIntl } from "react-intl";
 import { Route } from "react-router";
-import { Load } from "../shared/loading";
+import { Load } from "../shared/load";
 
 const MenuItems = (routes: { icon; route }[]) => {
   const intl = useIntl();
