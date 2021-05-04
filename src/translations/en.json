@@ -3,7 +3,11 @@
   "dashboard": "Dashboard",
   "airports": "Airports",
   "airlines": "Airlines",
+  "airline": "Airline",
+  "airline_create_update": "Create an airline or update an existing one.",
   "flights": "Flights",
   "planes": "Planes",
-  "airportSelect": "Select airport"
+  "airportSelect": "Select airport",
+  "edit": "Edit",
+  "name": "Name"
 }
