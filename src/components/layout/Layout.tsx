@@ -17,16 +17,11 @@ import { Airlines } from "../pages/airlines/Airlines";
 import airlinesApi from "./../../api/airlines-api";
 
 function Layout({ setLocale }) {
-  const intl = useIntl();
   const [collapsed, setCollapsed] = useState(false);
-  const [image, setImage] = useState(true);
+  const image = true;
 
   const handleLocaleChange = (checked: boolean | ((prevState: boolean) => boolean)) => {
     setLocale(checked ? "ar" : "en");
-  };
-
-  const handleImageChange = (checked: boolean | ((prevState: boolean) => boolean)) => {
-    setImage(checked);
   };
 
   const handleToggleSidebar = () => {

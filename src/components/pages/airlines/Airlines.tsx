@@ -3,32 +3,21 @@ import { Container, Row } from "react-bootstrap";
 import api from "./../../../api/airlines-api";
 import { buildTable } from "../../shared/Table";
 import { HlButton } from "../../shared/Button";
-import { FormModal } from "../../shared/FormModal";
+import { FormModal, submit } from "../../shared/FormModal";
+import { useIntl } from "react-intl";
 
 const Airlines = ({ data }) => {
   const [airlines, setAirlines] = useState(data);
   const [modalState, showModal] = useState([false, {}]);
 
-  const onSubmit = async airline => {
-    if (airline.id) {
-      await api.put(airline.id, airline);
+  const intl = useIntl();
 
-      setAirlines(
-        airlines.map(line => {
-          return line.id == airline.id ? airline : line;
-        })
-      );
-    } else {
-      airline.id = (await api.post(airline)).data.id;
-      setAirlines([...airlines, airline]);
-    }
-
-    showModal([false]);
-  };
+  const onSubmit = async airline =>
+    await submit(airline, airlines, setAirlines, api, () => showModal([false]));
 
   const actions = [
     {
-      desc: "Edit",
+      desc: intl.formatMessage({ id: "edit" }),
       onClick: async row => {
         console.log(row);
         const airline = (await api.get(row.id)).data;
@@ -37,7 +26,9 @@ const Airlines = ({ data }) => {
     }
   ];
 
-  const formControls = { name: { type: "text", desc: "Name" } };
+  const formControls = {
+    name: { type: "text", desc: intl.formatMessage({ id: "name" }) }
+  };
 
   return (
     <Container>
@@ -50,20 +41,14 @@ const Airlines = ({ data }) => {
         <FormModal
           state={modalState}
           controls={formControls}
-          title="Airline"
-          description="Create an airline or update an existing one."
+          title={intl.formatMessage({ id: "airline" })}
+          description={intl.formatMessage({ id: "airline_create_update" })}
           onSubmit={onSubmit}
           onHide={() => showModal([false])}
         />
       )}
     </Container>
   );
-};
-
-const newAirline = airlines => {
-  const last = airlines.slice(-1)[0];
-  const id = last.id + 1;
-  return { id: id, name: id.toString() };
 };
 
 export { Airlines };
