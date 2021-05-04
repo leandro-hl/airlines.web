@@ -1,38 +1,61 @@
 import React, { useState } from "react";
-import { Button, Container, Form, Row } from "react-bootstrap";
-
-import { buildTable } from "../../shared/table";
-import { AirlineModal } from "./AirlineModal";
+import { Container, Row } from "react-bootstrap";
+import api from "./../../../api/airlines-api";
+import { buildTable } from "../../shared/Table";
+import { HlButton } from "../../shared/Button";
+import { FormModal } from "../../shared/FormModal";
 
 const Airlines = ({ data }) => {
   const [airlines, setAirlines] = useState(data);
-  const [show, setShow] = useState(false);
+  const [modalState, showModal] = useState([false, {}]);
+
+  const onSubmit = async airline => {
+    if (airline.id) {
+      await api.put(airline.id, airline);
+
+      setAirlines(
+        airlines.map(line => {
+          return line.id == airline.id ? airline : line;
+        })
+      );
+    } else {
+      airline.id = (await api.post(airline)).data.id;
+      setAirlines([...airlines, airline]);
+    }
+
+    showModal([false]);
+  };
 
   const actions = [
     {
       desc: "Edit",
-      onClick: row => {
+      onClick: async row => {
         console.log(row);
-        setShow(true);
+        const airline = (await api.get(row.id)).data;
+        showModal([true, airline]);
       }
     }
   ];
 
+  const formControls = { name: { type: "text", desc: "Name" } };
+
   return (
     <Container>
       <Row>
-        <Button
-          onClick={() => {
-            setAirlines([...airlines, newAirline(airlines)]);
-            setShow(true);
-          }}
-        >
-          +
-        </Button>
+        <HlButton onClick={() => showModal([true])}>+</HlButton>
       </Row>
       <Row>{buildTable(airlines, actions)}</Row>
 
-      <AirlineModal show={show} setShow={setShow} />
+      {modalState[0] && (
+        <FormModal
+          state={modalState}
+          controls={formControls}
+          title="Airline"
+          description="Create an airline or update an existing one."
+          onSubmit={onSubmit}
+          onHide={() => showModal([false])}
+        />
+      )}
     </Container>
   );
 };
