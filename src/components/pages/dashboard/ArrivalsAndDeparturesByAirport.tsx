@@ -1,9 +1,9 @@
-import Select from "./Select";
+import Select from "../../shared/Select";
 import Form from "react-bootstrap/Form";
 import { useIntl } from "react-intl";
 import React, { useState } from "react";
 import { getData } from "./functions";
-import TwoLinesChart from "./TwoLinesChart";
+import TwoLinesChart from "../../shared/TwoLinesChart";
 
 const ArrivalsAndDeparturesByAirport = () => {
   const intl = useIntl();
