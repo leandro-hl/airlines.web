@@ -1,46 +1,47 @@
 import React, { useState } from "react";
-import { Container, Row } from "react-bootstrap";
 import { getRestApi } from "../../../api/rest-api";
-import { buildTable } from "../../shared/Table";
-import { HlButton } from "../../shared/Button";
-import { editAction } from "../../shared/actions";
-import { FormModal, submit } from "../../shared/FormModal";
+import { editAction, addAction } from "../../shared/actions";
+import { submit } from "../../shared/FormModal";
+import { PageLayout } from "../PageLayout";
 import { useIntl } from "react-intl";
 
-const Planes = ({ data }) => {
-  const [airlines, setAirlines] = useState(data);
+const Planes = ({ id, data }) => {
+  const [planes, setPlanes] = useState(data);
   const [modalState, showModal] = useState([false, {}]);
 
-  const api = getRestApi("planes");
+  const api = getRestApi(id);
   const intl = useIntl();
 
-  const onSubmit = async airline =>
-    await submit(airline, airlines, setAirlines, api, () => showModal([false]));
+  //header
+  const headerConfig = {
+    buttons: [addAction(intl, () => showModal([true]))]
+  };
 
-  const actions = [editAction(intl, api.get, airline => showModal([true, airline]))];
+  //grid
+  const gridConfig = {
+    data: planes,
+    columnNames: ["id", "name"],
+    actions: [editAction(intl, api.get, plane => showModal([true, plane]))]
+  };
 
-  const formControls = {
-    name: { type: "text", desc: intl.formatMessage({ id: "name" }) }
+  //modal
+  const modalConfig = {
+    state: modalState,
+    formControls: {
+      name: { type: "text", desc: intl.formatMessage({ id: "name" }) }
+    },
+    onSubmit: async plane =>
+      await submit(plane, planes, setPlanes, api, () => showModal([false])),
+    onHide: () => showModal([false])
   };
 
   return (
-    <Container>
-      <Row>
-        <HlButton onClick={() => showModal([true])}>+</HlButton>
-      </Row>
-      <Row>{buildTable(airlines, actions)}</Row>
-
-      {modalState[0] && (
-        <FormModal
-          state={modalState}
-          controls={formControls}
-          title={intl.formatMessage({ id: "airline" })}
-          description={intl.formatMessage({ id: "airline_create_update" })}
-          onSubmit={onSubmit}
-          onHide={() => showModal([false])}
-        />
-      )}
-    </Container>
+    <PageLayout
+      id={id}
+      headerConfig={headerConfig}
+      gridConfig={gridConfig}
+      modalConfig={modalConfig}
+    />
   );
 };
 
