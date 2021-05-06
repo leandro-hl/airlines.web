@@ -22,7 +22,7 @@ const RouteItems = (routes: { comp; route; init? }[]) => {
       <Route
         path={`/${r.route}`}
         exact={true}
-        render={() => <Load Component={r.comp} initialLoad={r.init} />}
+        render={() => <Load id={r.route} Component={r.comp} initialLoad={r.init} />}
         key={r.route}
       />
     );

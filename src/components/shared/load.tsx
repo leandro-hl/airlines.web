@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Load = ({ Component, initialLoad }) => {
+const Load = ({ id, Component, initialLoad }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [result, setResult] = useState({});
 
@@ -19,7 +19,7 @@ const Load = ({ Component, initialLoad }) => {
     return <div>Loading...</div>;
   }
 
-  return <Component {...result} />;
+  return <Component id={id} {...result} />;
 };
 
 export { Load };
