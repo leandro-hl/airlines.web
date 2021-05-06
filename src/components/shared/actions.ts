@@ -8,4 +8,11 @@ const editAction = (intl, get, action) => {
   };
 };
 
-export { editAction };
+const addAction = (intl, action) => {
+  return {
+    desc: intl.formatMessage({ id: "add" }),
+    onClick: () => action()
+  };
+};
+
+export { editAction, addAction };
