@@ -10,6 +10,7 @@ const Flights = ({ id, data }) => {
   const [modalState, showModal] = useState([false, {}]);
 
   const api = getRestApi(id);
+  const airportsApi = getRestApi("airports");
   const intl = useIntl();
 
   //header
@@ -18,9 +19,16 @@ const Flights = ({ id, data }) => {
   };
 
   //grid
+  //dependency between how the column is called and the data shown (make obj descr and prop)
   const gridConfig = {
     data: flights,
-    columnNames: ["id", "departure", "departure date", "arrival", "arrival date"],
+    columnsConfig: [
+      { key: "id", name: "id" },
+      { key: "departure", name: "departure" },
+      { key: "departureDate", name: "departure date" },
+      { key: "arrival", name: "arrival" },
+      { key: "arrivalDate", name: "arrival date" }
+    ],
     actions: [editAction(intl, api.get, flight => showModal([true, flight]))]
   };
 
@@ -28,7 +36,22 @@ const Flights = ({ id, data }) => {
   const modalConfig = {
     state: modalState,
     formControls: {
-      name: { type: "text", desc: intl.formatMessage({ id: "name" }) }
+      arrivalId: {
+        type: "select",
+        desc: intl.formatMessage({ id: "arrival" }),
+        options: async () => {
+          return (await airportsApi.options()).data;
+        },
+        label: intl.formatMessage({ id: "arrivals" })
+      },
+      departureId: {
+        type: "select",
+        desc: intl.formatMessage({ id: "departure" }),
+        options: async () => {
+          return (await airportsApi.options()).data;
+        },
+        label: intl.formatMessage({ id: "departures" })
+      }
     },
     onSubmit: async flight =>
       await submit(flight, flights, setFlights, api, () => showModal([false])),
