@@ -10,8 +10,12 @@ const PageLayout = ({ id, headerConfig, gridConfig, modalConfig }) => {
   return (
     <Container>
       <Row>
-        {headerConfig?.buttons?.map(x => {
-          return <HlButton onClick={x.onClick}>{x.desc}</HlButton>;
+        {headerConfig?.buttons?.map((x, i) => {
+          return (
+            <HlButton onClick={x.onClick} key={i}>
+              {x.desc}
+            </HlButton>
+          );
         })}
       </Row>
       <Row>{buildTable(gridConfig)}</Row>
