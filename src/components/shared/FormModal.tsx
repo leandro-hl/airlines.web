@@ -1,6 +1,7 @@
 import { HlModalContainer, HlModal } from "./Modal";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
+import { Select } from "./Select";
 
 const FormModal = ({ state, title, description, controls, onHide, onSubmit }) => {
   const [formData, setFormData] = useState(state[1] ?? {});
@@ -10,7 +11,11 @@ const FormModal = ({ state, title, description, controls, onHide, onSubmit }) =>
   };
 
   const controlList = (
-    <FormControlList data={formData} controls={controls} handleChange={handleChange} />
+    <FormControlList
+      data={formData}
+      controlsConfig={controls}
+      handleChange={handleChange}
+    />
   );
 
   return (
@@ -29,20 +34,29 @@ const FormModal = ({ state, title, description, controls, onHide, onSubmit }) =>
   );
 };
 
-const FormControlList = ({ data, controls, handleChange }) => {
+const FormControlList = ({ data, controlsConfig, handleChange }) => {
+  const controlTypes = {
+    text: Form.Control,
+    select: Select
+  };
+
   return (
     <>
-      {Object.keys(controls).map(prop => {
-        return (
-          <Form.Control
-            type={controls[prop].type}
-            key={prop}
-            placeholder={controls[prop].desc}
-            name={prop}
-            defaultValue={data[prop]}
-            onChange={handleChange}
-          />
-        );
+      {Object.keys(controlsConfig).map((prop, i) => {
+        const config = controlsConfig[prop];
+        const Control = controlTypes[config.type];
+
+        const controlConfig = {
+          name: prop,
+          key: i,
+          defaultValue: data[prop],
+          onChange: handleChange,
+          placeholder: config.desc,
+          options: config.options,
+          label: config.label
+        };
+
+        return <Control {...controlConfig} />;
       })}
     </>
   );
