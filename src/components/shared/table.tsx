@@ -42,8 +42,8 @@ const HlRow = ({ data, columns, actions }: { data; columns; actions? }) => {
   );
 };
 
-const buildTable = ({ data, columnNames, actions }) => {
-  const columns = columnNames.map(name => <HlColumn name={name} key={name} />);
+const buildTable = ({ data, columnsConfig, actions }) => {
+  const columns = columnsConfig.map(col => <HlColumn name={col.name} key={col.key} />);
 
   const rows = data.map((row, i) => (
     <HlRow data={row} columns={columns} actions={actions} key={i} />
