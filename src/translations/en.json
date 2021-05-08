@@ -8,12 +8,17 @@
   "airlines_create_update": "Create an airline or update an existing one.",
   "airline": "Airline",
   "flights": "Flights",
-  "flights_create_update": "Create an flight or update an existing one.",
+  "flights_create_update": "Create a flight or update an existing one.",
   "flight": "Flight",
   "planes": "Planes",
-  "planes_create_update": "Create an plane or update an existing one.",
+  "planes_create_update": "Create a plane or update an existing one.",
   "plane": "Plane",
   "airportSelect": "Select airport",
   "edit": "Edit",
-  "name": "Name"
+  "add": "+",
+  "name": "Name",
+  "arrival": "Arrival",
+  "arrivals": "Arrivals",
+  "departure": "Departure",
+  "departures": "Departures"
 }
