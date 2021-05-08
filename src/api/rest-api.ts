@@ -15,6 +15,9 @@ const getRestApi = (module: string) => {
     },
     put: async (id: number, item) => {
       return await axios.put(buildUrl(url, id), item);
+    },
+    options: async () => {
+      return await axios.get(buildUrl(url, "options"));
     }
   };
 };
