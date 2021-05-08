@@ -1,4 +1,4 @@
-import Select from "../../shared/Select";
+import { Select } from "../../shared/Select";
 import Form from "react-bootstrap/Form";
 import { useIntl } from "react-intl";
 import React, { useState } from "react";
@@ -24,9 +24,10 @@ const ArrivalsAndDeparturesByAirport = () => {
       <Form>
         <Form.Group controlId="params">
           <Select
-            label={intl.formatMessage({ id: "airportSelect" })}
+            name="airport"
             options={airports}
-            selected={airport.val}
+            defaultValue={airport.val}
+            placeholder={intl.formatMessage({ id: "airportSelect" })}
             onChange={onChange}
           />
         </Form.Group>
