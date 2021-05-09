@@ -62,18 +62,18 @@ const FormControlList = ({ data, controlsConfig, handleChange }) => {
   );
 };
 
-const submit = async (item, items, setItems, api, onFinished) => {
-  if (item.id) {
-    await api.put(item.id, item);
+const submit = async (toSubmit, collection, setState, api, onFinished) => {
+  if (toSubmit.id) {
+    const updated = (await api.put(toSubmit.id, toSubmit)).data;
 
-    setItems(
-      items.map(line => {
-        return line.id == item.id ? item : line;
+    setState(
+      collection.map(item => {
+        return item.id == toSubmit.id ? updated : item;
       })
     );
   } else {
-    item.id = (await api.post(item)).data.id;
-    setItems([...items, item]);
+    toSubmit.id = (await api.post(toSubmit)).data.id;
+    setState([...collection, toSubmit]);
   }
 
   onFinished();
