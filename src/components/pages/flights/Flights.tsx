@@ -36,14 +36,6 @@ const Flights = ({ id, data }) => {
   const modalConfig = {
     state: modalState,
     formControls: {
-      arrivalId: {
-        type: "select",
-        desc: intl.formatMessage({ id: "arrival" }),
-        options: async () => {
-          return (await airportsApi.options()).data;
-        },
-        label: intl.formatMessage({ id: "arrivals" })
-      },
       departureId: {
         type: "select",
         desc: intl.formatMessage({ id: "departure" }),
@@ -51,6 +43,14 @@ const Flights = ({ id, data }) => {
           return (await airportsApi.options()).data;
         },
         label: intl.formatMessage({ id: "departures" })
+      },
+      arrivalId: {
+        type: "select",
+        desc: intl.formatMessage({ id: "arrival" }),
+        options: async () => {
+          return (await airportsApi.options()).data;
+        },
+        label: intl.formatMessage({ id: "arrivals" })
       }
     },
     onSubmit: async flight =>
