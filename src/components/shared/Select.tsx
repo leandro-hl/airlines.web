@@ -12,31 +12,32 @@ const generateOptions = options => {
 };
 
 const Select = ({ name, options, defaultValue, placeholder, onChange }) => {
-  const [selectOptions, setOptions] = useState([]);
+  const [availableOptions, setAvailableOptions] = useState([]);
 
   useEffect(() => {
     if (options instanceof Function) {
-      options().then(r => setOptions(generateOptions(r)));
+      options().then(r => setAvailableOptions(generateOptions(r)));
     } else {
-      setOptions(generateOptions(options));
+      setAvailableOptions(generateOptions(options));
     }
   }, []);
 
   return (
     <>
+      <Form.Label>{placeholder}</Form.Label>
       <Form.Control
         as="select"
         custom
         name={name}
         onChange={onChange}
         value={defaultValue}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
       >
-        <option disabled selected={!defaultValue}>
-          {placeholder}
-        </option>
-        {selectOptions}
+        {!defaultValue ? (
+          <option disabled selected>
+            {placeholder}
+          </option>
+        ) : null}
+        {availableOptions}
       </Form.Control>
     </>
   );
