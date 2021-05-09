@@ -20,5 +20,7 @@
   "arrival": "Arrival",
   "arrivals": "Arrivals",
   "departure": "Departure",
-  "departures": "Departures"
+  "departures": "Departures",
+  "model": "Model",
+  "seats": "Seats"
 }
