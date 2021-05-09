@@ -20,7 +20,10 @@ const Airlines = ({ id, data }) => {
   //grid
   const gridConfig = {
     data: airlines,
-    columnNames: ["id", "name"],
+    columnsConfig: [
+      { key: "id", name: "id" },
+      { key: "name", name: "name" }
+    ],
     actions: [editAction(intl, api.get, airline => showModal([true, airline]))]
   };
 
