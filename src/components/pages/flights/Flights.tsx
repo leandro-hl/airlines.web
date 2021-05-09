@@ -11,6 +11,7 @@ const Flights = ({ id, data }) => {
 
   const api = getRestApi(id);
   const airportsApi = getRestApi("airports");
+  const airlinesApi = getRestApi("airlines");
   const intl = useIntl();
 
   //header
@@ -27,7 +28,8 @@ const Flights = ({ id, data }) => {
       { key: "departure", name: "departure" },
       { key: "departureDate", name: "departure date" },
       { key: "arrival", name: "arrival" },
-      { key: "arrivalDate", name: "arrival date" }
+      { key: "arrivalDate", name: "arrival date" },
+      { key: "airlineName", name: "Airline" }
     ],
     actions: [editAction(intl, api.get, flight => showModal([true, flight]))]
   };
@@ -51,6 +53,14 @@ const Flights = ({ id, data }) => {
           return (await airportsApi.options()).data;
         },
         label: intl.formatMessage({ id: "arrivals" })
+      },
+      airlineId: {
+        type: "select",
+        desc: intl.formatMessage({ id: "airline" }),
+        options: async () => {
+          return (await airlinesApi.options()).data;
+        },
+        label: intl.formatMessage({ id: "airlines" })
       }
     },
     onSubmit: async flight =>

@@ -20,7 +20,11 @@ const Planes = ({ id, data }) => {
   //grid
   const gridConfig = {
     data: planes,
-    columnNames: ["id", "name"],
+    columnsConfig: [
+      { key: "id", name: "id" },
+      { key: "model", name: "model" },
+      { key: "seats", name: "seats" }
+    ],
     actions: [editAction(intl, api.get, plane => showModal([true, plane]))]
   };
 
@@ -28,7 +32,8 @@ const Planes = ({ id, data }) => {
   const modalConfig = {
     state: modalState,
     formControls: {
-      name: { type: "text", desc: intl.formatMessage({ id: "name" }) }
+      model: { type: "text", desc: intl.formatMessage({ id: "model" }) },
+      seats: { type: "text", desc: intl.formatMessage({ id: "seats" }) }
     },
     onSubmit: async plane =>
       await submit(plane, planes, setPlanes, api, () => showModal([false])),

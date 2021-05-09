@@ -72,8 +72,8 @@ const submit = async (toSubmit, collection, setState, api, onFinished) => {
       })
     );
   } else {
-    toSubmit.id = (await api.post(toSubmit)).data.id;
-    setState([...collection, toSubmit]);
+    const inserted = (await api.post(toSubmit)).data;
+    setState([...collection, inserted]);
   }
 
   onFinished();
